@@ -1,0 +1,2 @@
+class AdvancedSearchError(Exception):
+    pass
