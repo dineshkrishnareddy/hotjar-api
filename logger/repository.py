@@ -1,5 +1,5 @@
 from data_parser import PostgresqlParser
-from exceptions import AdvancedSearchError
+from exceptions import SearchError
 from sqlalchemy.exc import SQLAlchemyError
 
 
@@ -19,7 +19,7 @@ class LogRepository:
         try:
             return self.execute(statement)
         except SQLAlchemyError as e:
-            raise AdvancedSearchError(str(e.__dict__['orig']))
+            raise SearchError(str(e.__dict__['orig']))
 
     def simple_search(self, browser, country):
         statement = """select * from log where browser ilike '%s' or country ilike '%s'""" % (browser, country)
@@ -27,4 +27,4 @@ class LogRepository:
         try:
             return self.execute(statement)
         except SQLAlchemyError as e:
-            raise AdvancedSearchError(str(e.__dict__['orig']))
+            raise SearchError(str(e.__dict__['orig']))

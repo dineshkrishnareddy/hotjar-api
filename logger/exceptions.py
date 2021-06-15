@@ -1,2 +1,2 @@
-class AdvancedSearchError(Exception):
+class SearchError(Exception):
     pass

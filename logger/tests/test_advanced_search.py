@@ -2,20 +2,7 @@ from app import app
 import json
 
 
-def test_simple_search():
-    app.testing = True
-    client = app.test_client()
-
-    res = client.get('/search/browser/philippines')
-
-    assert len(res.json) == 8
-
-    res = client.get('/search/IE/philippines')
-
-    assert len(res.json) == 31
-
-
-def test_advance_search():
+def test_advanced_search():
     """ Test 200 response on API endpoint """
     # Given
     app.testing = True
@@ -34,7 +21,7 @@ def test_advance_search():
     assert len(res.json) == 100
 
 
-def test_advance_search_failure_4xx():
+def test_advanced_search_failure_4xx():
     """ Test 400 response on API endpoint given wrong JSON data """
     # Given
     app.testing = True
@@ -51,7 +38,7 @@ def test_advance_search_failure_4xx():
     assert res.status_code == 400
 
 
-def test_advance_search_failure_5xx():
+def test_advanced_search_failure_5xx():
     """ Test 500 response on API endpoint given wrong column name """
     # Given
     app.testing = True
@@ -66,4 +53,4 @@ def test_advance_search_failure_5xx():
 
     # Then
     assert res.status_code == 400
-    assert 'column "dummy" does not exist' in res.json
+    assert 'column "dummy" does not exist' in str(res.json)
